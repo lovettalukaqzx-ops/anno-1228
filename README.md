@@ -94,10 +94,3 @@ These wrappers use Linux `tc` on loopback and may require `sudo`. You can pass t
 ```bash
 ./scripts/run_he1_lan_full.sh --initial-repetitions 1 --max-repetitions 1 --jobs 1 --recv-exponents 20 --send-exponents 0 --block-sizes 6144
 ```
-
-## Repository Notes
-
-- Build outputs are generated in `build-review/` and ignored by Git.
-- Old copied `build/` directories are ignored because their CMake caches are machine-specific.
-- `crx1/preCode/` is ignored for upload. It contains about 9 GB of historical archives/generated data and is not used by the reviewer run scripts.
-- `crx1/preInstall/` is ignored for upload. The reviewer scripts use the portable dependency bundle in `crx1/preLibrary/`.
