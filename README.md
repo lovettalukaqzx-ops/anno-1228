@@ -101,4 +101,3 @@ These wrappers use Linux `tc` on loopback and may require `sudo`. You can pass t
 - Old copied `build/` directories are ignored because their CMake caches are machine-specific.
 - `crx1/preCode/` is ignored for upload. It contains about 9 GB of historical archives/generated data and is not used by the reviewer run scripts.
 - `crx1/preInstall/` is ignored for upload. The reviewer scripts use the portable dependency bundle in `crx1/preLibrary/`.
-- Nested dependency Git metadata from the copied tree is not needed for reviewers; the source files themselves are kept in the artifact.
