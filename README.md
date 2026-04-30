@@ -1,4 +1,4 @@
-# Reviewer Artifact: PSI Protocol Implementations
+# PSI Protocol Implementations
 
 This repository contains the runnable reviewer artifact for five PSI protocol implementations:
 
