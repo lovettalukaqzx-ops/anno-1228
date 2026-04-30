@@ -1,0 +1,82 @@
+cmake_minimum_required(VERSION 3.20)
+project(PSI)
+
+set(CMAKE_CXX_STANDARD 20)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set(CMAKE_CXX_EXTENSIONS OFF)
+
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O3 -march=native -mpclmul -fcoroutines")
+
+if(NOT CMAKE_BUILD_TYPE)
+  set(CMAKE_BUILD_TYPE Release CACHE STRING "Choose the type of build." FORCE)
+endif()
+
+# preLibrary paths
+set(PRELIB ${CMAKE_SOURCE_DIR}/../crx1/preLibrary)
+
+# binfuse (header-only, brings in xor_singleheader + mio)
+add_subdirectory(prelib/binfuse)
+
+# PSI library
+add_library(functions psi.cc)
+
+target_include_directories(functions PUBLIC
+  ${PRELIB}/include
+)
+
+target_link_libraries(functions PUBLIC binfuse)
+
+# Executable
+add_executable(PSI main.cc)
+
+target_link_libraries(PSI
+  functions
+  ${PRELIB}/lib/liblibOTe.a
+  ${PRELIB}/lib/libcoproto.a
+  ${PRELIB}/lib/libmacoro.a
+  ${PRELIB}/lib/libcryptoTools.a
+  ${PRELIB}/lib/libbitpolymul.a
+  ${PRELIB}/lib/libsodium.a
+  ${PRELIB}/lib/libgmssl.so
+  ${PRELIB}/lib/libboost_system.a
+  ${PRELIB}/lib/libboost_thread.a
+  pthread
+)
+
+add_executable(PSI_batch_stats batch_stats.cc)
+
+target_link_libraries(PSI_batch_stats
+  pthread
+)
+
+add_executable(PSI_profile profile_preprocessing.cc)
+
+target_link_libraries(PSI_profile
+  functions
+  ${PRELIB}/lib/liblibOTe.a
+  ${PRELIB}/lib/libcoproto.a
+  ${PRELIB}/lib/libmacoro.a
+  ${PRELIB}/lib/libcryptoTools.a
+  ${PRELIB}/lib/libbitpolymul.a
+  ${PRELIB}/lib/libsodium.a
+  ${PRELIB}/lib/libgmssl.so
+  ${PRELIB}/lib/libboost_system.a
+  ${PRELIB}/lib/libboost_thread.a
+  pthread
+)
+
+add_executable(PSI_selftest selftest.cc)
+
+target_link_libraries(PSI_selftest
+  functions
+  ${PRELIB}/lib/liblibOTe.a
+  ${PRELIB}/lib/libcoproto.a
+  ${PRELIB}/lib/libmacoro.a
+  ${PRELIB}/lib/libcryptoTools.a
+  ${PRELIB}/lib/libbitpolymul.a
+  ${PRELIB}/lib/libsodium.a
+  ${PRELIB}/lib/libgmssl.so
+  ${PRELIB}/lib/libboost_system.a
+  ${PRELIB}/lib/libboost_thread.a
+  pthread
+)

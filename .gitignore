@@ -1,0 +1,45 @@
+# Local build outputs
+build/
+build*/
+build-*/
+cmake-build-*/
+CMakeFiles/
+CMakeCache.txt
+cmake_install.cmake
+compile_commands.json
+*.o
+*.a
+
+# Keep the shipped reviewer dependency bundle.
+!crx1/preLibrary/lib/*.a
+
+# Generated benchmark/output folders
+bench_results/
+profile_results/
+stats_runs/
+**/stats_runs/
+**/bench_results/
+**/profile_results/
+*.log
+
+# Copied legacy archives and large generated data not required by reviewer runs.
+# This folder is about 9 GB and contains nested archive/history material.
+crx1/preCode/
+
+# Historical dependency build/source trees are not used by the reviewer scripts.
+# The runnable dependency bundle is crx1/preLibrary/.
+crx1/preInstall/
+crx1/preLibrary/lib/cmake/okvs/
+crx1/preLibrary/lib/pkgconfig/
+
+# Local editor metadata
+.vscode/
+chat/
+
+# Nested repository metadata backups after flattening copied dependencies.
+**/.git-local-backup/
+**/.git-backup/
+
+# OS/editor noise
+.DS_Store
+*~
